@@ -16,13 +16,13 @@ model=struct;
   model.numEpochs = 16;
   
 % Number of random presentation orders to be averaged across
-  model.numOrders=1;
+  model.numOrders=30;
   
 % coordinates for the training stimuli. also used as reference points
-  [model.referencepoints,model.teachervalues]= SHJINPUTS(1);
+  [model.referencepoints,model.teachervalues]= SHJINPUTS(4);
 % 
-% order of parameters: c, outLrnRate, hidLrnRate, phi
-  model.params = [4.087343  0.191752  0.020000  2.358758];
+% order of parameters: c, assoclearning, attenlearning, phi
+  model.params = [4  0.2  0.2  2];
  
 %************* Run Simulations ***************%
 result = ALCOVE_TRAIN(model);
