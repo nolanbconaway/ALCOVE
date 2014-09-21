@@ -1,4 +1,4 @@
-function probabilities=FORWARD_PASS(params,stimuli,referencepoints,...
+function probabilities=FORWARDPASS(params,stimuli,referencepoints,...
 	distanceMetric,attentionweights,associationweights)
 
 %-----------------------------------------------------
@@ -16,23 +16,23 @@ function probabilities=FORWARD_PASS(params,stimuli,referencepoints,...
 % initalize variables
 c=params(1);
 phi=params(4);
-numStim=size(stimuli,1);
-numHidNodes=size(referencepoints,1);
-numOutputs=size(associationweights,2);
-probabilities=zeros(numStim,numOutputs);
+numstimuli=size(stimuli,1);
+numhiddens=size(referencepoints,1);
+numcategories=size(associationweights,2);
+probabilities=zeros(numstimuli,numcategories);
 
 %-----------------------------------------------------
 % iterate over all stimuni
-for stim=1:numStim
-    
+for stim=1:numstimuli
+    networkinput = stimuli(stim,:);
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
     if distanceMetric == 0
-        distances = abs(repmat(stimuli(stim,:),[numHidNodes,1]) - referencepoints);
-        distances= sum(distances .* repmat(attentionweights,[numHidNodes,1]),2);
+        distances = abs(repmat(networkinput,[numhiddens,1]) - referencepoints);
+        distances = sum(distances .* repmat(attentionweights,[numhiddens,1]),2)';
     elseif distanceMetric == 1
-        distances = (repmat(stimuli(stim,:),[numHidNodes,1]) - referencepoints).^2;
-        distances= sqrt(sum(distances .* repmat(attentionweights,[numHidNodes,1]),2))';
+        distances = (repmat(networkinput,[numhiddens,1]) - referencepoints).^2;
+        distances = sqrt(sum(distances .* repmat(attentionweights,[numhiddens,1]),2))';
     end
     hiddenactivation = exp((-c)*distances);
 

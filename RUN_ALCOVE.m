@@ -10,22 +10,22 @@ addpath([pwd '/utility/'])
 model=struct;
 
 % distance metric: 0 for city block, 1 for euclidean
-  model.distanceMetric = 0;
+  model.distancemetric = 0;
   
 % Number of times Alcove will iterate over the list of input stimuli 
-  model.numEpochs = 16;
+  model.numblocks = 16;
   
 % Number of random presentation orders to be averaged across
-  model.numOrders=30;
+  model.numinitals=30;
   
 % coordinates for the training stimuli. also used as reference points
-  [model.referencepoints,model.teachervalues]= SHJINPUTS(4);
+  [model.referencepoints,model.teachervalues]= SHJINPUTS(1);
 % 
 % order of parameters: c, assoclearning, attenlearning, phi
-  model.params = [4  0.2  0.2  2];
+  model.params = [4  0.1  0.2  4];
  
 %************* Run Simulations ***************%
-result = ALCOVE_TRAIN(model);
+result = ALCOVE(model);
 v2struct(result)
 
 

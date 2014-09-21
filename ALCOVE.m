@@ -1,4 +1,4 @@
-function [result] = ALCOVE_TRAIN(model)
+function [result] = ALCOVE(model)
 
 % ------------------------------------------------------------------------
 % This trains the alcove network given the design specification in the sole
@@ -24,10 +24,10 @@ v2struct(model)
 
 %************* Declaration of Global Variables *************%
 %-----------------------------------------------------------%
-numInputs=size(referencepoints,2);
-numOutputs=size(teachervalues,2);
-numStim=size(referencepoints,1);
-numTrials = numStim*numEpochs;
+numfeatures=size(referencepoints,2);
+numcategories=size(teachervalues,2);
+numstimuli=size(referencepoints,1);
+numupdates = numstimuli*numblocks;
 
 c=params(1);
 assoclearning=params(2);
@@ -36,18 +36,18 @@ phi=params(4);
 
 %-----------------------------------------------------------%
 % iterate over presentation orders
-trainingdata=zeros(numTrials,numOrders);
-for ordernumber=1:numOrders
+trainingdata=zeros(numupdates,numinitals);
+for modelnumber=1:numinitals
 	
     %  initialize weight matrices
-	attentionweights=ones(1,numInputs)*(1/numInputs); % vector of attention weights
-	associationweights=zeros(numStim,numOutputs);% matrix of association weights
+	attentionweights=ones(1,numfeatures)*(1/numfeatures); % vector of attention weights
+	associationweights=zeros(numstimuli,numcategories);% matrix of association weights
     
     %  generate a random presentation order
-    presentationorder = getpresentationorder(numStim,numEpochs,teachervalues);
+    presentationorder = getpresentationorder(numstimuli,numblocks,teachervalues);
 
     %  iterate over trials
-	for trialnumber=1:numTrials
+	for trialnumber=1:numupdates
         
         networkinput=referencepoints(presentationorder(trialnumber),:);
         targetactivation=teachervalues(presentationorder(trialnumber),:);
@@ -55,16 +55,16 @@ for ordernumber=1:numOrders
         
         % Calculate Distances and Activation at Hidden Node
         %--------------------------------------------------------------
-        if distanceMetric == 0
-            distances = abs(repmat(networkinput,[numStim,1]) - referencepoints);
-            distances = sum(distances .* repmat(attentionweights,[numStim,1]),2)';
+        if distancemetric == 0
+            distances = abs(repmat(networkinput,[numstimuli,1]) - referencepoints);
+            distances = sum(distances .* repmat(attentionweights,[numstimuli,1]),2)';
 
-        elseif distanceMetric == 1
-            distances = (repmat(networkinput,[numStim,1]) - referencepoints).^2;
-            distances = sqrt(sum(distances .* repmat(attentionweights,[numStim,1]),2))';
+        elseif distancemetric == 1
+            distances = (repmat(networkinput,[numstimuli,1]) - referencepoints).^2;
+            distances = sqrt(sum(distances .* repmat(attentionweights,[numstimuli,1]),2))';
         end
         hiddenactivation = exp((-c)*distances);
-
+		
         % Calculates the activation at the output nodes
         %--------------------------------------------------------------
         outputactivation = hiddenactivation * associationweights;
@@ -74,7 +74,7 @@ for ordernumber=1:numOrders
         % Calculate the categorization probabilities and store perfomance
         %--------------------------------------------------------------
         sumActivation=sum(exp(phi * outputactivation)); 
-        trainingdata(trialnumber,ordernumber) = exp(phi * outputactivation(correctcategory)) / sumActivation;
+        trainingdata(trialnumber,modelnumber) = exp(phi * outputactivation(correctcategory)) / sumActivation;
 
         % Adjust the weights between hidden nodes and output nodes
         %--------------------------------------------------------------
@@ -84,15 +84,19 @@ for ordernumber=1:numOrders
 
         % Adjust the attention weights between input nodes and hidden nodes
         %--------------------------------------------------------------
-        hiddenerror=sum(associationweights.*repmat(outputerror,[numStim,1]),2);
-        hiddenderivative = hiddenerror' .* hiddenactivation * c * (abs(referencepoints - repmat(networkinput,[numStim,1])));
+        hiddenerror=sum(associationweights.*repmat(outputerror,[numstimuli,1]),2);
+        hiddenderivative = hiddenerror' .* hiddenactivation * c * (abs(referencepoints - repmat(networkinput,[numstimuli,1])));
         attentionweights = attentionweights + ((-attenlearning) * hiddenderivative);
         attentionweights(attentionweights>1)=1;
         attentionweights(attentionweights<0)=0;
-    end   
+	end   
+	
+% % 	a test set can go here
+% 	ps = FORWARDPASS(params,referencepoints,referencepoints,...
+% 		distancemetric,attentionweights,associationweights)
 end
 
 % save items in the result struct
 result=struct;
-result.training=returnblocks(mean(trainingdata,2),numStim)';
+result.training=returnblocks(mean(trainingdata,2),numstimuli)';
 		  

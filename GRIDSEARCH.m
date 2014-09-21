@@ -26,11 +26,11 @@ numparams=size(parameterlist,1);
 % initialize alcove's design
 model=struct;
 % distance metric: 0 for city block, 1 for euclidean
-  model.distanceMetric = 0;
+  model.distancemetric = 0;
 % Number of times Alcove will iterate over the list of input stimuli 
-  model.numEpochs = 16;
+  model.numblocks = 16;
 % Number of random presentation orders to be averaged across
-  model.numOrders=10;
+  model.numinitials=10;
 % coordinates for the training stimuli and category labels
   [model.referencepoints,model.teachervalues]= SHJINPUTS(shjtype);
 % ------------------------------------------------------------------- 
@@ -44,7 +44,7 @@ for pnum=1:numparams
 	model.params = parameterlist(pnum,:);
 	
 %   run simulation
-	result = ALCOVE_TRAIN(model);
+	result = ALCOVE(model);
   
 %   calculate and store fit (in SSD)
 	training(:,pnum)=result.training;
