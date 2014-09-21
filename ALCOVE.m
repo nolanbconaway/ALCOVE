@@ -36,7 +36,7 @@ phi=params(4);
 
 %-----------------------------------------------------------%
 % iterate over presentation orders
-trainingdata=zeros(numupdates,numinitals);
+training=zeros(numupdates,numinitals);
 for modelnumber=1:numinitals
 	
     %  initialize weight matrices
@@ -74,7 +74,7 @@ for modelnumber=1:numinitals
         % Calculate the categorization probabilities and store perfomance
         %--------------------------------------------------------------
         sumActivation=sum(exp(phi * outputactivation)); 
-        trainingdata(trialnumber,modelnumber) = exp(phi * outputactivation(correctcategory)) / sumActivation;
+        training(trialnumber,modelnumber) = exp(phi * outputactivation(correctcategory)) / sumActivation;
 
         % Adjust the weights between hidden nodes and output nodes
         %--------------------------------------------------------------
@@ -98,5 +98,5 @@ end
 
 % save items in the result struct
 result=struct;
-result.training=returnblocks(mean(trainingdata,2),numstimuli)';
+result.training=blockrows(mean(training,2),numstimuli);
 		  

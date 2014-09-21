@@ -16,7 +16,7 @@ model=struct;
   model.numblocks = 16;
   
 % Number of random presentation orders to be averaged across
-  model.numinitals=30;
+  model.numinitals=5;
   
 % coordinates for the training stimuli. also used as reference points
   [model.referencepoints,model.teachervalues]= SHJINPUTS(1);
