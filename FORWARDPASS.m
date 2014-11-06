@@ -13,7 +13,7 @@ function probabilities=FORWARDPASS(params,stimuli,referencepoints,...
 % assoicationweights=matrix of weights connecting hiddens and outputs
 %-----------------------------------------------------
 
-% initalize variables
+% initialize variables
 c=params(1);
 phi=params(4);
 numstimuli=size(stimuli,1);
@@ -22,9 +22,10 @@ numcategories=size(associationweights,2);
 probabilities=zeros(numstimuli,numcategories);
 
 %-----------------------------------------------------
-% iterate over all stimuni
+% iterate over all stimuli
 for stim=1:numstimuli
     networkinput = stimuli(stim,:);
+    
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
     if distanceMetric == 0

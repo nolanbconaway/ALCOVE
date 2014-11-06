@@ -16,7 +16,7 @@ function [result] = ALCOVE(model)
 % are the necessary fields.
 % 
 % The sole output, result, is a struct containing the following:
-%	  training: accuracy for each block,(averaged across presentaton orders)
+%	  training: accuracy for each block,(averaged across presentation orders)
 % ------------------------------------------------------------------------
 
 % unpack input struct
@@ -71,7 +71,7 @@ for modelnumber=1:numinitals
         outputactivation(outputactivation> 1) = 1.0; % humble teachers
         outputactivation(outputactivation<-1)= -1.0;
 
-        % Calculate the categorization probabilities and store perfomance
+        % Calculate the categorization probabilities and store performance
         %--------------------------------------------------------------
         sumActivation=sum(exp(phi * outputactivation)); 
         training(trialnumber,modelnumber) = exp(phi * outputactivation(correctcategory)) / sumActivation;
@@ -90,10 +90,6 @@ for modelnumber=1:numinitals
         attentionweights(attentionweights>1)=1;
         attentionweights(attentionweights<0)=0;
 	end   
-	
-% % 	a test set can go here
-% 	ps = FORWARDPASS(params,referencepoints,referencepoints,...
-% 		distancemetric,attentionweights,associationweights)
 end
 
 % save items in the result struct

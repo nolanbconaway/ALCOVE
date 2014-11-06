@@ -2,7 +2,7 @@ close;clear;clc; format shortg
 addpath([pwd '/utility/'])
 
 % -------------------------------------------------------------------
-% this script runs a grid search over alcoves four paramaters.
+% this script runs a grid search over alcoves four parameters.
 % as a demo, it fits to the shj type of your choice, but is problem-general
 % -------------------------------------------------------------------
 
@@ -55,6 +55,6 @@ for pnum=1:numparams
 	end
 end
 
-% save fits and paramaters
+% save fits and parameters
 save('alcove.mat','training','parameterlist')
 
