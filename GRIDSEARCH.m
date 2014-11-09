@@ -37,7 +37,7 @@ model=struct;
 
 % -------------------------------------------------------------------
 % iterate over parameters
-training=zeros(model.numEpochs,numparams);
+training=zeros(model.numblocks,numparams);
 for pnum=1:numparams
 
 % 	get current parameter configuration

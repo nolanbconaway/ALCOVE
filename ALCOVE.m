@@ -36,8 +36,8 @@ phi=params(4);
 
 %-----------------------------------------------------------%
 % iterate over presentation orders
-training=zeros(numupdates,numinitals);
-for modelnumber=1:numinitals
+training=zeros(numupdates,numinitials);
+for modelnumber=1:numinitials
 	
     %  initialize weight matrices
 	attentionweights=ones(1,numfeatures)*(1/numfeatures); % vector of attention weights
