@@ -19,4 +19,4 @@ For almost all situations, inputs and targets should be scaled to [-1 +1]. ALCOV
 
 *Nolan Conaway (nconawa1@binghamton.edu)* 
 
-*November 10, 2014*
+*November 18, 2014*
