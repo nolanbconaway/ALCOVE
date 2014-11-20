@@ -7,7 +7,7 @@ This set of scripts runs a minimal version of the ALCOVE model of category learn
 Simulations are run by executing the *START.m* script. All simulations begin by passing a model struct to the *ALCOVE.m* function. At a minimum, 'model' needs to include:
 
 ```
-model.betavalue __________ beta parameter for focusing
+model.distancemetric _____ 0 for city block, 1 for euclidean
 model.referencepoints ____ an [eg,dimension] matrix of training exemplars
 model.teachervalues ______ targets for each training item
 model.numblocks __________ number of passes through the training set
