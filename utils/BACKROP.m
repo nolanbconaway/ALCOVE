@@ -4,10 +4,13 @@ function [attentionweights,associationweights]=BACKROP(associationweights, ...
 %--------------------------------------------------------------------------
 % This script updates the weights of an ALCOVE network based on the results
 % of a prior call to FORWARDPASS.m. Its sole outputs are updated weight
-% matrices
+% matrices.
+% 
+% Future version of this code should support lists of inputs-- the code has
+% not yet been tested on its function beyond a single training pattern.
 % 
 % -------------------------------------
-% --INPUT ARGUMENTS         DESCRIPTION
+% --INPUT ARGUMENTS		 	DESCRIPTION
 % 	associationweights		weights to update
 %	attentionweights		weights to update
 % 	targetactivation		Target (teacher) activations, in range [-1 +1]

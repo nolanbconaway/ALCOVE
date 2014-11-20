@@ -10,7 +10,7 @@ addpath([pwd '/utils/'])
 model=struct;
   model.distancemetric = 0; % 0 for city block, 1 for euclidean
   model.numblocks = 16; % num passes through the training set
-  model.numinitials = 10; % Number of initalizations to average across
+  model.numinitials = 10; % Number of initializations to average across
   model.params = [2  0.1  0.2  4]; %c, assoclearning, attenlearning, phi
  
 %************* Run Simulations ***************%

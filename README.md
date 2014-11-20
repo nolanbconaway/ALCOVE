@@ -11,7 +11,7 @@ model.distancemetric _____ 0 for city block, 1 for euclidean
 model.referencepoints ____ an [eg,dimension] matrix of training exemplars
 model.teachervalues ______ targets for each training item
 model.numblocks __________ number of passes through the training set
-model.numinitials ________ number of randomized initalizations
+model.numinitials ________ number of randomized initializations
 model.params _____________ a vector of parameter settings
 ```
 

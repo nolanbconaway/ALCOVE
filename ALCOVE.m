@@ -8,7 +8,7 @@ function [result] = ALCOVE(model)
 % 	  distancemetric: 0 for city block, 1 for euclidean
 %	  referencepoints: coordinates for the training stimuli
 % 	  numblocks: number of times to iterate over the training set
-% 	  numinitials: number of random initalizations
+% 	  numinitials: number of random initializations
 %	  teachervalues: category assignment for each training pattern
 % 	  params: [c, outLrnRate, hidLrnRate, phi]
 % 
@@ -34,19 +34,19 @@ numupdates		   = numreferencepoints*numblocks;
 training=zeros(numupdates,numinitials);
 for modelnumber=1:numinitials
 	
-    %  initialize weight matrices and presentation order
+	%  initialize weight matrices and presentation order
 	attentionweights   = ones(1,numfeatures) .* (1/numfeatures);
 	associationweights = zeros(numreferencepoints,numcategories);
-    presentationorder  = getpresentationorder(numreferencepoints,...
+	presentationorder  = getpresentationorder(numreferencepoints,...
 		numblocks,teachervalues);
 
-    %  iterate over trials
+	%  iterate over trials
 	for trialnumber=1:numupdates
-        
-        networkinput     = referencepoints(presentationorder(trialnumber),:);
-        targetactivation = teachervalues(presentationorder(trialnumber),:);
-        correctcategory  = targetactivation == 1;
-        
+		
+		networkinput	 = referencepoints(presentationorder(trialnumber),:);
+		targetactivation = teachervalues(presentationorder(trialnumber),:);
+		correctcategory  = targetactivation == 1;
+		
 		% pass activations through the network
 		%--------------------------------------------------------------
 		[outputactivation, hiddenactivation] = FORWARDPASS(...
