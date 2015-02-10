@@ -22,6 +22,8 @@ function [result] = ALCOVE(model)
 % unpack input struct
 v2struct(model)
 
+rng('shuffle') %get random seed
+
 %************* Declaration of Global Variables *************%
 %-----------------------------------------------------------%
 numfeatures		   = size(referencepoints,2);
