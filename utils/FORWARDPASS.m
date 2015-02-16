@@ -1,5 +1,5 @@
 function [outputactivation, hiddenactivation] = FORWARDPASS(...
-	networkinput,referencepoints,distancemetric,attentionweights,...
+	stimuli,referencepoints,distancemetric,attentionweights,...
 	associationweights,params)
 %--------------------------------------------------------------------------
 % This script runs a forward pass in alcove and returns the information
@@ -21,7 +21,7 @@ function [outputactivation, hiddenactivation] = FORWARDPASS(...
 %--------------------------------------------------------------------------
 
 % initialize variables
-numstimuli		   = size(networkinput,1);
+numstimuli		   = size(stimuli,1);
 c				   = params(1);
 numhiddens		   = size(referencepoints,1);
 numcategories	   = size(associationweights,2);
@@ -33,7 +33,7 @@ hiddenactivation   = zeros(numstimuli,numhiddens);
 %-----------------------------------------------------
 % iterate over all stimuli
 for stim=1:numstimuli
-	networkinput = networkinput(stim,:);
+	networkinput = stimuli(stim,:);
 	
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
