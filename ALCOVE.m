@@ -40,7 +40,7 @@ for modelnumber=1:numinitials
 	attentionweights   = ones(1,numfeatures) .* (1/numfeatures);
 	associationweights = zeros(numreferencepoints,numcategories);
 	presentationorder  = getpresentationorder(numreferencepoints,...
-		numblocks,teachervalues);
+		numblocks);
 
 	%  iterate over trials
 	for trialnumber=1:numupdates
