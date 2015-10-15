@@ -1,6 +1,5 @@
 function [outputactivation, hiddenactivation] = FORWARDPASS(...
-	stimuli,referencepoints,distancemetric,attentionweights,...
-	associationweights,params)
+	stimuli,exemplars,distancemetric,attentionweights,associationweights,params)
 %--------------------------------------------------------------------------
 % This script runs a forward pass in alcove and returns the information
 % about network performance.
@@ -8,7 +7,7 @@ function [outputactivation, hiddenactivation] = FORWARDPASS(...
 % -------------------------------------
 % --INPUT ARGUMENTS			DESCRIPTION
 %	networkinput			items to be passed through the model
-%	referencepoints			coordinates of each known exemplar
+%	exemplars				coordinates of each known exemplar
 %	attentionweights		input->hidden weights
 % 	associationweights		hidden->output weights
 %	distancemetric			0 for city block, 1 for euclidean
@@ -23,7 +22,7 @@ function [outputactivation, hiddenactivation] = FORWARDPASS(...
 % initialize variables
 numstimuli		   = size(stimuli,1);
 c				   = params(1);
-numhiddens		   = size(referencepoints,1);
+numhiddens		   = size(exemplars,1);
 numcategories	   = size(associationweights,2);
 
 % initialize storage
@@ -38,10 +37,10 @@ for stim=1:numstimuli
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
 	if distancemetric == 0
-		distances = abs(repmat(networkinput,[numhiddens,1]) - referencepoints);
+		distances = abs(repmat(networkinput,[numhiddens,1]) - exemplars);
 		distances = sum(distances .* repmat(attentionweights,[numhiddens,1]),2)';
 	elseif distancemetric == 1
-		distances = (repmat(networkinput,[numhiddens,1]) - referencepoints).^2;
+		distances = (repmat(networkinput,[numhiddens,1]) - exemplars).^2;
 		distances = sqrt(sum(distances .* repmat(attentionweights,[numhiddens,1]),2))';
 	end
 	hiddenactivation(stim,:) = exp((-c)*distances);
