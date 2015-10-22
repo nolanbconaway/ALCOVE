@@ -1,4 +1,4 @@
-function [attentionweights,associationweights]=BACKROP(associationweights, ...
+function [attentionweights,associationweights]=BACKPROP(associationweights, ...
 	attentionweights,target,outputactivation,hiddenactivation, ...
 	exemplars,networkinput,params)
 %--------------------------------------------------------------------------
@@ -26,14 +26,6 @@ c				   = params(1);
 assoclearning	   = params(2);
 attenlearning	   = params(3);
 numhiddenunits	   = size(associationweights,1);
-
-
-% define global variables
-c				   = params(1);
-assoclearning	   = params(2);
-attenlearning	   = params(3);
-numhiddenunits	   = size(associationweights,1);
-
 
 % Compute update for the association weights
 %--------------------------------------------------------------

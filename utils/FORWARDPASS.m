@@ -36,13 +36,7 @@ for stim=1:numstimuli
 	
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
-	if distancemetric == 0
-		distances = abs(repmat(networkinput,[numhiddens,1]) - exemplars);
-		distances = sum(distances .* repmat(attentionweights,[numhiddens,1]),2)';
-	elseif distancemetric == 1
-		distances = (repmat(networkinput,[numhiddens,1]) - exemplars).^2;
-		distances = sqrt(sum(distances .* repmat(attentionweights,[numhiddens,1]),2))';
-	end
+	distances = pairdist(networkinput,exemplars,distancemetric,attentionweights);
 	hiddenactivation(stim,:) = exp((-c)*distances);
 
 % Calculates the activation at the output nodes
@@ -52,7 +46,7 @@ for stim=1:numstimuli
 end
 
 % humble teachers
-outputactivation(outputactivation> 1) = 1.0;
-outputactivation(outputactivation<-1)= -1.0;
+outputactivation(outputactivation> 1) =  1.0;
+outputactivation(outputactivation<-1) = -1.0;
 
 end
