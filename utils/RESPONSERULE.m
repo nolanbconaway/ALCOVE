@@ -11,4 +11,4 @@ function [ps]=RESPONSERULE(outputactivation,phi)
 
 numcategories 		= size(outputactivation,2);
 outputactivation 	= exp(outputactivation .* phi);
-ps = outputactivation ./ repmat(sum(outputactivation,2),[1,numcategories]);
+ps = bsxfun(@rdivide,outputactivation,sum(outputactivation,2));

@@ -28,7 +28,7 @@ rng('shuffle') %get random seed
 %-----------------------------------------------------------%
 numfeatures		   = size(exemplars,2);
 numcategories	   = size(targets,2);
-numexemplars = size(exemplars,1);
+numexemplars       = size(exemplars,1);
 numupdates		   = numexemplars*numblocks;
 
 %-----------------------------------------------------------%
