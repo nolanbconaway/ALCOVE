@@ -1,3 +1,5 @@
+#ALCOVE-MATLAB
+
 This set of scripts runs a minimal version of the ALCOVE model of category learning (Kruschke, 1992). It is written in MATLAB, and is currently set up to simulate the six-types problem of Shepard, Hovland, & Jenkins (1961)--though it should generalize to any dataset. There are a variety of utility scripts, and a few important ones:
 
 - **START.m** can be used to test ALCOVE using particular parameter sets.
@@ -6,17 +8,16 @@ This set of scripts runs a minimal version of the ALCOVE model of category learn
 
 Simulations are run by executing the *START.m* script. All simulations begin by passing a model struct to the *ALCOVE.m* function. At a minimum, 'model' needs to include:
 
-```
-model.distancemetric _____ 0 for city block, 1 for euclidean
-model.referencepoints ____ an [eg,dimension] matrix of training exemplars
-model.teachervalues ______ targets for each training item
-model.numblocks __________ number of passes through the training set
-model.numinitials ________ number of randomized initializations
-model.params _____________ a vector of parameter settings
-```
+| Field             | Description                               | Type                            |
+| ----------------- | ------------------------------------------| :-----------------------------: |
+| `referencepoints` | Training items & exemplar nodes           | Item-by-feature matrix          |
+| `teachervalues`   | Network targets for each exemplar         | Item-by-category matrix [-1 +1] |
+| `numblocks`       | # of passes through the training set      | Integer (>0)                    |
+| `numinitials`     | # of random initial networks              | Integer (>0)                    |
+| `distancemetric`  | Distance metric for exemplar nodes        | *cityblock* or *euclidean*      |
+| `params`          | Network parameters (specificity, association learning, attention learning, response mapping) | Float vector (0 - Inf)|
 
 For almost all situations, inputs and targets should be scaled to [-1 +1]. ALCOVE.m will train the network and return a result struct. As-is, 'result' contains only training accuracy for each initialization at each training block. Additional measures, such as test phase classification, can be added. You will need to write custom code to compare ALCOVE's performance to a set of behavioral data.
 
-*Nolan Conaway (nconawa1@binghamton.edu)* 
-
-*November 18, 2014*
+Written by [Nolan Conaway](http://bingweb.binghamton.edu/~nconawa1/).
+Updated January 4, 2016
