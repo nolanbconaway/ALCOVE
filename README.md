@@ -15,7 +15,7 @@ Simulations are run by executing the *START.m* script. All simulations begin by 
 | `numblocks`       | # of passes through the training set      | Integer (>0)                    |
 | `numinitials`     | # of random initial networks              | Integer (>0)                    |
 | `distancemetric`  | Distance metric for exemplar nodes        | *cityblock* or *euclidean*      |
-| `params`          | [specificity, association learning, attention learning, response mapping] | Float vector (0 - Inf)|
+| `params`          | [C, association learning, attention learning, PHI] | Float vector (0 - Inf)|
 
 For almost all situations, inputs and targets should be scaled to [-1 +1]. ALCOVE.m will train the network and return a result struct. As-is, 'result' contains only training accuracy for each initialization at each training block. Additional measures, such as test phase classification, can be added. You will need to write custom code to compare ALCOVE's performance to a set of behavioral data.
 
