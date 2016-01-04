@@ -10,8 +10,8 @@ Simulations are run by executing the *START.m* script. All simulations begin by 
 
 | Field             | Description                               | Type                            |
 | ----------------- | ------------------------------------------| :-----------------------------: |
-| `referencepoints` | Training items & exemplar nodes           | Item-by-feature matrix          |
-| `teachervalues`   | Network targets for each exemplar         | Item-by-category matrix [-1 +1] |
+| `exemplars`       | Matrix of training items / exemplar nodes | Item-by-feature matrix          |
+| `targets`         | Network targets for each exemplar         | Item-by-category matrix [-1 +1] |
 | `numblocks`       | # of passes through the training set      | Integer (>0)                    |
 | `numinitials`     | # of random initial networks              | Integer (>0)                    |
 | `distancemetric`  | Distance metric for exemplar nodes        | *cityblock* or *euclidean*      |
