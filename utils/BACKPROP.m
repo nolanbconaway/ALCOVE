@@ -43,5 +43,7 @@ hiddenderivative = hiddenerror' .* hiddenactivation * c * ...
 associationweights = associationweights + outputderivative';
 
 attentionweights = attentionweights + ((-attenlearning) .* hiddenderivative);
-attentionweights(attentionweights>1)=1;
-attentionweights(attentionweights<0)=0;
+attentionweights(attentionweights<0)=0; % attention is non-negative
+
+% Attention capacity: should the weights sum to 1?  
+% attentionweights = attentionweights ./ sum(attentionweights,2);
