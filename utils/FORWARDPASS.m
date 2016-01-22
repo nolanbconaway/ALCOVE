@@ -20,31 +20,17 @@ function [outputactivation, hiddenactivation] = FORWARDPASS(...
 %--------------------------------------------------------------------------
 
 % initialize variables
-numstimuli		   = size(stimuli,1);
-c				   = params(1);
-numhiddens		   = size(exemplars,1);
-numcategories	   = size(associationweights,2);
-
-% initialize storage
-outputactivation   = zeros(numstimuli,numcategories);
-hiddenactivation   = zeros(numstimuli,numhiddens);
-
-%-----------------------------------------------------
-% iterate over all stimuli
-for stim=1:numstimuli
-	networkinput = stimuli(stim,:);
+c = params(1);
 	
 %Calculate Distances and Activation at Hidden Node
 %-----------------------------------------------------
-	distances = pairdist(networkinput,exemplars,distancemetric,attentionweights);
-	hiddenactivation(stim,:) = exp((-c)*distances);
+distances = pairdist(stimuli,exemplars,distancemetric,attentionweights);
+hiddenactivation = exp((-c)*distances);
 
 % Calculates the activation at the output nodes
 %-----------------------------------------------------
-	outputactivation(stim,:) = hiddenactivation(stim,:) * associationweights;
+outputactivation = hiddenactivation * associationweights;
    	
-end
-
 % humble teachers
 outputactivation(outputactivation> 1) =  1.0;
 outputactivation(outputactivation<-1) = -1.0;

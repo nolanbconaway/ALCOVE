@@ -11,7 +11,7 @@ model=struct;
 	model.distancemetric = 'cityblock'; % 'cityblock' or 'euclidean'
 	model.numblocks = 16; % num passes through the training set
 	model.numinitials = 10; % Number of initializations to average across
-	model.params = [2  0.1  0.2  4]; %c, assoclearning, attenlearning, phi
+	model.params = [1  0.1  0.2  4]; %c, assoclearning, attenlearning, phi
  
 %   load exemplars
 	load shj
