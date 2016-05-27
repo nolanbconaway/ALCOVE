@@ -4,7 +4,7 @@ This set of scripts runs a minimal version of the ALCOVE model of category learn
 
 - **START.m** can be used to test ALCOVE using particular parameter sets.
 - **ALCOVE.m** uses a provided architecture to train a network on a set of inputs and category assignments.
-- **FORWARDPASS.m** and **BACKPROP.m** are used to propagate activations forward through the model, and error backward through the model, respectively. BACKPROP.m additionally completes a weight update.
+- **FORWARDPASS.m** and **UPDATE.m** are used to propagate activations forward through the model, and error backward through the model, respectively. BACKPROP.m additionally completes a weight update.
 
 Simulations are run by executing the *START.m* script. All simulations begin by passing a model struct to the *ALCOVE.m* function. At a minimum, 'model' needs to include:
 

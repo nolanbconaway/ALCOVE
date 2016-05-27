@@ -9,6 +9,5 @@ function [ps]=RESPONSERULE(outputactivation,phi)
 % 	phi						response mapping parameter
 %--------------------------------------------------------------------------
 
-numcategories 		= size(outputactivation,2);
 outputactivation 	= exp(outputactivation .* phi);
 ps = bsxfun(@rdivide,outputactivation,sum(outputactivation,2));

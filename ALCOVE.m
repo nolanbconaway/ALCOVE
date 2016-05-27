@@ -58,9 +58,9 @@ for modelnumber=1:numinitials
 		ps = RESPONSERULE(outputactivation,params(4));
 		training(trialnumber,modelnumber) = ps(correctcategory);
 
-		% update weights using backprop
+		% update weights
 		%--------------------------------------------------------------
-		[attentionweights,associationweights]=BACKPROP(associationweights, ...
+		[attentionweights,associationweights]=UPDATE(associationweights, ...
 			attentionweights,trialtarget,outputactivation,hiddenactivation, ...
 			exemplars,trialinput,params);
 	end   
